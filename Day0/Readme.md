@@ -60,7 +60,8 @@ These tools are for the **creative part of the process**: designing the logic an
     sudo apt-get install iverilog
     ```
 
--   **Proof of Success:** ![Alt text](Output/Iverilog.png)
+-   **Proof of Success:** 
+![Alt text](Output/Iverilog.png)
 
 #### 3. GTKWave (The Waveform Viewer)
 
@@ -73,7 +74,8 @@ These tools are for the **creative part of the process**: designing the logic an
     sudo apt install gtkwave
     ```
 
--   **Proof of Success:** ![Alt text](Output/gtkwavever.png)
+-   **Proof of Success:** 
+![Alt text](Output/gtkwavever.png)
 
 ---
 
@@ -104,7 +106,8 @@ These tools help manage the physical and analog aspects of chip design.
     sudo make install
     ```
 
--   **Proof of Success:** ![Alt text](Output/ngspicever.png)
+-   **Proof of Success:** 
+![Alt text](Output/ngspicever.png)
 
 #### 5. Magic (The Layout Editor)
 
@@ -126,7 +129,8 @@ These tools help manage the physical and analog aspects of chip design.
     sudo make install
     ```
 
--   **Proof of Success:** ![Alt text](Output/Magicver.png)
+-   **Proof of Success:** 
+![Alt text](Output/Magicver.png)
 
 ---
 
@@ -177,6 +181,7 @@ OpenLane is the centerpiece of my automated flow, integrating all the individual
     GNU Make 4.4.1
     ...
     ```
+![Alt text](Output/toolsver.png)
 
 -   **OpenLane Installation (After Reboot):**
     ```bash
