@@ -203,5 +203,7 @@ OpenLane is the centerpiece of my automated flow, integrating all the individual
     cd $HOME/OpenLane
     make test
     ```
+    ![Alt text](Output/Openlanever.png)
+
 
 By completing these Day 0 tasks, I now have a fully functional digital workshop ready for my RISC-V chip design journey. All tools, simulators, and automated flows are installed and verified—my digital anvil is forged.
