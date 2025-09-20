@@ -47,7 +47,7 @@ These tools are for the **creative part of the process**: designing the logic an
     ```
 
 -   **Proof of Success:**
-![Alt text](Day0/Output/YosysVerification)
+![Alt text](Output/YosysVerification)
 
 #### 2. Icarus Verilog (The Simulator)
 
@@ -60,7 +60,7 @@ These tools are for the **creative part of the process**: designing the logic an
     sudo apt-get install iverilog
     ```
 
--   **Proof of Success:** ![Alt text](Day0/Output/Iverilog.png)
+-   **Proof of Success:** ![Alt text](Output/Iverilog.png)
 
 #### 3. GTKWave (The Waveform Viewer)
 
@@ -73,7 +73,7 @@ These tools are for the **creative part of the process**: designing the logic an
     sudo apt install gtkwave
     ```
 
--   **Proof of Success:** ![Alt text](Day0/Output/gtkwavever.png)
+-   **Proof of Success:** ![Alt text](Output/gtkwavever.png)
 
 ---
 
@@ -104,7 +104,7 @@ These tools help manage the physical and analog aspects of chip design.
     sudo make install
     ```
 
--   **Proof of Success:** ![Alt text](Day0/Output/ngspicever.png)
+-   **Proof of Success:** ![Alt text](Output/ngspicever.png)
 
 #### 5. Magic (The Layout Editor)
 
@@ -126,7 +126,7 @@ These tools help manage the physical and analog aspects of chip design.
     sudo make install
     ```
 
--   **Proof of Success:** ![Alt text](Day0/Output/Magicver.png)
+-   **Proof of Success:** ![Alt text](Output/Magicver.png)
 
 ---
 
