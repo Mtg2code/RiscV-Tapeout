@@ -41,6 +41,11 @@ I created several small Verilog files (`opt_check.v`, `opt_check2.v`, etc.) with
     abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
     show
     ```
+    ![Alt](Day3/Comb1.png)
+  ![Alt](Day3/Comb3OP2.png)
+  ![Alt](Day3/Comb3OP3.png)
+  ![Alt](Day3/Comb3OP4.png)
+  
 * **Lab 5 & 6 (Hierarchical Designs):** For designs with sub-modules (`multiple_module_opt.v`), I discovered a crucial two-step process. I had to first `flatten` the design to remove the module boundaries, which then allowed `opt_clean` to find optimization opportunities across the entire logic cone.
     ```bash
     # Phase 1: Flatten the design
@@ -60,7 +65,8 @@ I created several small Verilog files (`opt_check.v`, `opt_check2.v`, etc.) with
     abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
     show
     ```
-
+    ![Alt](Day3/Comb2P1.png)
+  [Alt](Day3/Comb2P2.png)
 #### Sequential Optimization Labs
 
 I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer handles constant inputs and unused outputs. For each, I first simulated the design to understand its expected behavior.
@@ -72,6 +78,7 @@ I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer h
         ./a.out
         gtkwave tb_dff_const1.vcd
         ```
+        ![Alt](Day3/Seq1Wave.png)
     * **Synthesis:**
         ```bash
         yosys
@@ -82,6 +89,7 @@ I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer h
         abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
         show
         ```
+        ![Alt](Day3/Seq1Show.png)
 
 * **Lab 2 (`dff_const2.v`):** In this case, the flop's output was always `1`, regardless of the clock or reset. The synthesizer was smart enough to recognize this and **optimized the flop away completely**, replacing it with a direct connection to a logic `1`.
     * **Simulation:**
@@ -90,6 +98,7 @@ I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer h
         ./a.out
         gtkwave tb_dff_const2.vcd
         ```
+        ![Alt](Day3/Seq2Wave.png)
     * **Synthesis:**
         ```bash
         yosys
@@ -100,7 +109,7 @@ I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer h
         abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
         show
         ```
-
+        ![Alt](Day3/Seq2Show.png)
 * **Lab 3 (`dff_const3.v`):** This lab involved two flip-flops in series. The simulation showed the classic one-cycle delay pipeline. Because of this dependency, Yosys correctly **retained both flip-flops**.
     * **Simulation:**
         ```bash
@@ -108,6 +117,7 @@ I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer h
         ./a.out
         gtkwave tb_dff_const3.vcd
         ```
+        ![Alt](Day3/Seq3Wave.png)
     * **Synthesis:**
         ```bash
         yosys
@@ -118,7 +128,8 @@ I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer h
         abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
         show
         ```
-
+        ![Alt](Day3/Seq3Show.png)
+      
 * **Lab 6 (`counter_opt.v`):** This was the most impressive optimization. I designed a 3-bit counter but only used the least significant bit (`count[0]`). By running `opt_clean -purge`, Yosys recognized that two flops were unused and **removed them**, leaving only a single toggle-flop.
     * **Simulation:**
         ```bash
@@ -126,6 +137,7 @@ I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer h
         ./a.out
         gtkwave tb_counter_opt.vcd
         ```
+       ![Alt](Day3/Seq4Wave.png)
     * **Synthesis:**
         ```bash
         yosys
@@ -137,5 +149,7 @@ I then moved on to designs with D-Flip-Flops (DFFs) to see how the synthesizer h
         abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
         show
         ```
+        ![Alt](Day3/Seq4Show.png)
+
 
         **👉 End of Day 3.** 
