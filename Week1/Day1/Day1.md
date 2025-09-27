@@ -34,7 +34,7 @@ To put theory into practice, I designed a simple 2:1 multiplexer. It's like a di
 -   **Simulation Results:**
     After compiling and running the simulation, I opened the `.vcd` file in GTKWave. The waveforms clearly showed that the output `y` correctly followed `i0` when `sel` was low, and followed `i1` when `sel` was high.
 
-    ![GTKWave screenshot showing the successful MUX simulation waveforms](images/day1-mux-waveform.png)
+   ![Alt text](Day1/GTkwaveGoodMux.png)
 
 ---
 
@@ -77,13 +77,13 @@ I followed a step-by-step command sequence inside the Yosys environment:
     ```bash
     show
     ```
-    ![The synthesized schematic of the MUX as shown by Yosys](images/day1-yosys-schematic.png)
+    ![ALT Text](Day1/Yoyss.png)
 
 7.  **Write the Final Netlist:** Finally, I saved the result as a new Verilog file. This file no longer contains behavioral code; instead, it's a structural list of standard cell instances and the wires connecting them.
     ```bash
     write_verilog -noattr good_mux_netlist.v
     ```
-    ![The final gate-level netlist file for the MUX](images/day1-mux-netlist.png)
+    ![ALT Text](Day1/YosysNetlistGoodMux.png)
 
 ---
 
@@ -94,5 +94,6 @@ I followed a step-by-step command sequence inside the Yosys environment:
 -   The combination of `iverilog` and `gtkwave` provides a powerful, visual environment for simulation and debugging.
 -   **Yosys** is the bridge between the abstract RTL design and a concrete gate-level implementation using a specific technology library like Sky130.
 -   I successfully completed my first full **RTL → Simulation → Synthesis** flow.
+
 
 **👉 End of Day 1.** 
