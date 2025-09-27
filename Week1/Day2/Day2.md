@@ -16,7 +16,7 @@ Before I can build anything, I need to understand my materials. In chip design, 
     -   **Operating Conditions (PVT Corners):** How cells behave under different Process, Voltage, and Temperature conditions (e.g., worst-case slow, typical, best-case fast). The file we're using, `sky130_fd_sc_hd__tt_025C_1v80.lib`, represents the **typical** corner.
     -   **Cell-Specific Info:** For each gate, it defines its logical function, timing delays (how long it takes for a signal to pass through), power consumption, and physical area.
 
-![A snippet from a .lib file showing its structure](images/day2-lib-file-example.png)
+![Alt](Day2/Library.png)
 
 ---
 
@@ -25,13 +25,12 @@ Before I can build anything, I need to understand my materials. In chip design, 
 I took a closer look at a few examples to understand the variety of cells available.
 
 -   **Complex Cell (`a2111o_1`):** This single cell implements the logic `X = !((A1 & A2) | B1 | C1 | D1)`. Using complex cells like this allows the synthesizer to build logic more efficiently than using only basic AND/OR/NOT gates.
-    ![Logic diagram for the a2111o_1 standard cell](images/day2-a2111o-gate.png)
+
 
 -   **Drive Strength Variants (`and2_1`, `and2_2`, `and2_4`):** The library contains multiple versions of the same simple 2-input AND gate. The only difference is their **drive strength**.
     -   `_1`: **Low drive strength.** Smallest area and lowest power, but the slowest.
     -   `_4`: **High drive strength.** Largest area and highest power, but the fastest. It can drive signals across longer wires or to more subsequent gates.
     This demonstrates the fundamental **Power-Performance-Area (PPA)** trade-off in chip design. The synthesizer's job is to pick the right variant to meet the timing and power goals.
-    ![Comparison of three different drive strength AND gates](images/day2-and2-variants.png)
 
 ---
 
@@ -58,6 +57,8 @@ This approach preserves the modular structure of my Verilog code. When I synthes
     write_verilog -noattr multiple_modules_hierarchical.v
     ```
 
+    ![Alt](Day2/Heirarchy.png)
+
 #### Flat Synthesis
 
 In this approach, I tell the synthesizer to dissolve all the submodule boundaries and combine everything into one single, massive logic block. This can sometimes allow for better optimization on small designs but makes debugging large ones much harder.
@@ -72,6 +73,8 @@ In this approach, I tell the synthesizer to dissolve all the submodule boundarie
     ```bash
     write_verilog -noattr multiple_modules_flat.v
     ```
+
+    ![Alt](Day2/flatten.png)
 
 ---
 
@@ -95,6 +98,7 @@ The output `Q` is forced to `1` immediately when `async_set` is high, regardless
     abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
     show
     ```
+     ![Alt](Day2/ASetDFF.png)
 
 #### DFF with Asynchronous Reset
 
@@ -110,7 +114,8 @@ The output `Q` is forced to `0` immediately when `async_reset` is high. This is 
     abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
     show
     ```
-
+   ![Alt](Day2/ASetDFFWave.png)
+   
 #### DFF with Synchronous Reset
 
 The reset only occurs if `sync_reset` is high *at the moment of a rising clock edge*.
@@ -125,6 +130,7 @@ The reset only occurs if `sync_reset` is high *at the moment of a rising clock e
     abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
     show
     ```
+     ![Alt](Day2/SResetDFF.png)
 
 #### DFF with Both Asynchronous and Synchronous Resets
 
@@ -140,7 +146,7 @@ This hybrid design includes an immediate asynchronous reset and a clock-dependen
     abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
     show
     ```
-
+     ![Alt](Day2/AandSResetDFF.png)
 ---
 
 ### Clever Optimizations in Synthesis
@@ -160,6 +166,7 @@ My Verilog code had `y = a * 2;`. Instead of building a multiplier, Yosys recogn
     show
     write_verilog -noattr mult2_net.v
     ```
+     ![Alt](Day2/OptimisedMul2.png)
 
 #### Case 2: Synthesis of `mult8` (Multiply by 8)
 
@@ -174,5 +181,7 @@ Similarly, multiplying by 8 is just a left bit-shift by 3 places (`a << 3`). Aga
     show
     write_verilog -noattr mult8_net.v
     ```
+     ![Alt](Day2/OptimisedMul8.png)
+
 
     **👉 End of Day 2.** 
