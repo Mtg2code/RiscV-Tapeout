@@ -65,7 +65,7 @@ iverilog ternary_operator_mux.v tb_ternary_operator_mux.v
 ./a.out
 gtkwave tb_ternary_operator_mux.vcd
 ```
-
+ ![Alt](Day4/TernaryWave.png)
 #### Synthesis with Yosys
 
 ```bash
@@ -77,6 +77,7 @@ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 write_verilog -noattr ternary_operator_mux_net.v
 ```
+![Alt](Day4/Ternary.png)
 
 #### GLS
 
@@ -85,7 +86,7 @@ iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_
 ./a.out
 gtkwave tb_ternary_operator_mux.vcd
 ```
-
+![Alt](Day4/GLS1.png)
 ### 2\. Bad MUX Design (incomplete sensitivity list)
 
 Here I wrote a MUX with only `sel` in the sensitivity list. This created a mismatch: in simulation it behaved like a latch, but after synthesis it mapped to a proper combinational MUX.
@@ -97,7 +98,7 @@ iverilog bad_mux.v tb_bad_mux.v
 ./a.out
 gtkwave tb_bad_mux.vcd
 ```
-
+![Alt](Day4/BadMux.png)
 #### Synthesis
 
 ```bash
@@ -109,7 +110,7 @@ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 write_verilog -noattr bad_mux_net.v
 ```
-
+![Alt](Day4/BadMuxShow.png)
 #### GLS
 
 ```bash
@@ -117,7 +118,7 @@ iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_
 ./a.out
 gtkwave tb_bad_mux.vcd
 ```
-
+![Alt](Day4/GLSBadMux.png)
 This showed a clear simulation-synthesis mismatch.
 
 ### 3\. Blocking Caveat Design
@@ -131,7 +132,7 @@ iverilog blocking_caveat.v tb_blocking_caveat.v
 ./a.out
 gtkwave tb_blocking_caveat.vcd
 ```
-
+![Alt](Day4/BlockingWave.png)
 #### Synthesis
 
 ```bash
@@ -143,7 +144,7 @@ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 write_verilog -noattr blocking_caveat_net.v
 ```
-
+![Alt](Day4/BlockingShow.png)
 #### GLS
 
 ```bash
@@ -151,7 +152,7 @@ iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_
 ./a.out
 gtkwave tb_blocking_caveat.vcd
 ```
-
+![Alt](Day4/GLSBlocking.png)
 Here again, pre-synthesis and post-synthesis results did not perfectly align—teaching me the importance of careful coding style.
 
 -----
@@ -162,5 +163,6 @@ Here again, pre-synthesis and post-synthesis results did not perfectly align—t
   * **Incomplete sensitivity lists** can create latch-like behavior in simulation but synthesize as pure combinational logic.
   * **Blocking assignments** can cause simulation vs. hardware mismatches if misused.
   * Writing clean, standard Verilog (**`always @(*)`** and **non-blocking** for sequential logic) avoids many pitfalls.
+
 
 👉 **End of Day 4.**
