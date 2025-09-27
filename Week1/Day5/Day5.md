@@ -151,7 +151,7 @@ These labs demonstrate how synthesis translates conditional logic and the pitfal
 | ` verilog module incomp_if (input i0, input i1, input i2, output reg y); always @(*) begin if (i0) y <= i1; end endmodule  ` | The synthesized design has a **D Latch inferred** due to incomplete `if` structure (missing `else` statement). |
 
 -----
-
+![Alt](Day5/If1Wave.png)
 ### Lab 2: Synthesis Result of Lab 1
 
 | Code File | Synthesis Analysis |
@@ -159,6 +159,7 @@ These labs demonstrate how synthesis translates conditional logic and the pitfal
 | **Verilog File** (Reference Lab 1 code) | **Realization of Logic** shows the inferred latch. |
 
 -----
+![Alt](Day5/If1Show.png)
 
 ### Lab 3: Nested If-Else
 
@@ -167,7 +168,7 @@ These labs demonstrate how synthesis translates conditional logic and the pitfal
 | ` verilog module incomp_if2 (input i0, input i1, input i2, input i3, output reg y); always @(*) begin if (i0) y <= i1; else if (i2) y <= i3; end endmodule  ` | **Inferred Latches** are present because `y` is unassigned when both `i0` and `i2` are low. |
 
 -----
-
+![Alt](Day5/If2Wave.png)
 ### Lab 4: Synthesis Result of Lab 3
 
 | Code File | Synthesis Analysis |
@@ -175,7 +176,7 @@ These labs demonstrate how synthesis translates conditional logic and the pitfal
 | **Verilog File** (Reference Lab 3 code) | **Realization of Logic** shows the inferred latch. |
 
 -----
-
+![Alt](Day5/If2Show.png)
 ### Lab 5: Complete Case Statement
 
 | Code File | Synthesis Analysis |
@@ -183,7 +184,7 @@ These labs demonstrate how synthesis translates conditional logic and the pitfal
 | ` verilog module comp_case (input i0, input i1, input i2, input [1:0] sel, output reg y); always @(*) begin case(sel) 2'b00 : y = i0; 2'b01 : y = i1; default : y = i2; endcase end endmodule  ` | The logic is a proper **combinational circuit** (MUX) because the `default` sets the output for all cases. |
 
 -----
-
+![Alt](Day5/CompCaseWave.png)
 ### Lab 6: Synthesis Result of Lab 5
 
 | Code File | Synthesis Analysis |
@@ -191,7 +192,7 @@ These labs demonstrate how synthesis translates conditional logic and the pitfal
 | **Verilog File** (Reference Lab 5 code) | **Realization of Logic** confirms the clean combinational MUX. |
 
 -----
-
+![Alt](Day5/CompCaseShow.png)
 ### Lab 7: Incomplete Case Handling
 
 | Code File | Synthesis Analysis |
@@ -199,7 +200,8 @@ These labs demonstrate how synthesis translates conditional logic and the pitfal
 | ` verilog module bad_case ( input i0, input i1, input i2, input i3, input [1:0] sel, output reg y ); always @(*) begin case(sel) 2'b00: y = i0; 2'b01: y = i1; 2'b10: y = i2; 2'b1?: y = i3; // '?' is a wildcard; be careful with incomplete cases! endcase end endmodule  ` | **Risk of Latch.** The synthesized design has a **D Latch inferred** due to incomplete case structure. |
 
 -----
-
+![Alt](Day5/BadCaseWave.png)
+![Alt](Day5/BadCaseShow.png)
 ### Lab 8: Partial Assignments in Case
 
 | Code File | Synthesis Analysis |
@@ -209,7 +211,12 @@ These labs demonstrate how synthesis translates conditional logic and the pitfal
 > **Note:** Steps to perform the above labs are shown in [Day 1](https://github.com/Ahtesham18112011/RTL_workshop/tree/main/Day_1).
 
 -----
+![Alt](Day5/PartialCaseAssign.png)
 
+
+
+> **Note:** Steps to perform the above labs are already shown in [Day 1](https://github.com/Mtg2code/RiscV-Tapeout/blob/main/Week1/Day1/Day1.md).
+> 
 ## 4\. For Loops in Verilog
 
 A **`for` loop** is used within procedural blocks to execute statements multiple times.
@@ -290,7 +297,7 @@ These labs demonstrate writing scalable and structurally repetitive code.
 | ` verilog module mux_generate ( input i0, input i1, input i2, input i3, input [1:0] sel, output reg y ); wire [3:0] i_int; assign i_int = {i3, i2, i1, i0}; integer k; always @(*) begin y = 1'b0; for (k = 0; k < 4; k = k + 1) begin if (k == sel) y = i_int[k]; end end endmodule  ` | **Efficient, Scalable MUX** (Behavioral Replication). |
 
 -----
-
+![Alt](Day5/MuxGenerate.png)
 ### Lab 10: 8-to-1 Demux Using Case
 
 | Code File | Hardware Purpose |
@@ -298,7 +305,7 @@ These labs demonstrate writing scalable and structurally repetitive code.
 | ` verilog module demux_case ( output o0, output o1, output o2, output o3, output o4, output o5, output o6, output o7, input [2:0] sel, input i ); reg [7:0] y_int; assign {o7, o6, o5, o4, o3, o2, o1, o0} = y_int; always @(*) begin y_int = 8'b0; case(sel) 3'b000 : y_int[0] = i; 3'b001 : y_int[1] = i; 3'b010 : y_int[2] = i; 3'b011 : y_int[3] = i; 3'b100 : y_int[4] = i; 3'b101 : y_int[5] = i; 3'b110 : y_int[6] = i; 3'b111 : y_int[7] = i; endcase end endmodule  ` | **8-to-1 Demux** (Static, non-scalable code). |
 
 -----
-
+![Alt](Day5/DeMuxCase.png)
 ### Lab 11: 8-to-1 Demux Using For Loop
 
 | Code File | Hardware Purpose |
@@ -306,13 +313,13 @@ These labs demonstrate writing scalable and structurally repetitive code.
 | ` verilog module demux_generate ( output o0, output o1, output o2, output o3, output o4, output o5, output o6, output o7, input [2:0] sel, input i ); reg [7:0] y_int; assign {o7, o6, o5, o4, o3, o2, o1, o0} = y_int; integer k; always @(*) begin y_int = 8'b0; for (k = 0; k < 8; k = k + 1) begin if (k == sel) y_int[k] = i; end end endmodule  ` | **Scalable 8-to-1 Demux** (Behavioral Replication). |
 
 -----
-
+![Alt](Day5/DeMuxGenerate.png)
 ### Lab 12: 8-bit Ripple Carry Adder with Generate Block
 
 | Code File | Hardware Purpose |
 | :--- | :--- |
 | ` verilog module rca ( input [7:0] num1, input [7:0] num2, output [8:0] sum ); wire [7:0] int_sum; wire [7:0] int_co; genvar i; generate for (i = 1; i < 8; i = i + 1) begin fa u_fa_1 (.a(num1[i]), .b(num2[i]), .c(int_co[i-1]), .co(int_co[i]), .sum(int_sum[i])); end endgenerate fa u_fa_0 (.a(num1[0]), .b(num2[0]), .c(1'b0), .co(int_co[0]), .sum(int_sum[0])); assign sum[7:0] = int_sum; assign sum[8] = int_co[7]; endmodule  ` | **Structural, Parameterized 8-bit RCA** (Structural Replication). |
-
+![Alt](Day5/RCA.png)
 **Full Adder Module:**
 
 ```verilog
@@ -322,11 +329,16 @@ endmodule
 ```
 
 -----
+![Alt](Day5/FA.png)
+
+
+> **Note:** Steps to Simulate the above labs are already shown in [Day 1](https://github.com/Mtg2code/RiscV-Tapeout/blob/main/Week1/Day1/Day1.md).
 
 ## Summary
 
   * **Latch Avoidance:** Always use **complete** `if-else` or `case` statements (e.g., include `else` or `default`) in **`always @(*)`** blocks.
   * **Scalability:** **`For` loops** and **`generate` blocks** are powerful tools for writing code that easily scales to different bit-widths and sizes.
   * **Clean Code:** Always ensure every signal is assigned in every possible execution path for combinational logic.
+
 
 -----
