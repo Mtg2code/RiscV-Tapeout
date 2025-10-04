@@ -114,7 +114,11 @@ When viewing the signals in GTKWave, you should confirm the following:
 | **`RV_TO_DAC[9:0]`** | The processor's 10-bit digital output, changing on each clock cycle as the program executes. |
 | **`OUT`** | The DAC’s analog output responding to the digital input. |
 
-**Observation:** You should see a **staircase-like waveform** for the DAC output, indicating successful digital-to-analog conversion and proper module interaction.
+
+![Alt](Week2/VSDbabySOC.png)
+**Observation:** We can see a **staircase-like waveform** for the DAC output, indicating successful digital-to-analog conversion and proper module interaction.
+
+
 
 -----
 
@@ -133,4 +137,5 @@ When viewing the signals in GTKWave, you should confirm the following:
   * [VSDBabySoC GitHub Repository](https://github.com/manili/VSDBabySoC)
   * [RVMyth Core](https://www.google.com/search?q=https://github.com/manili/VSDBabySoC/blob/main/src/module/rvmyth.v)
   * [AVSD DAC Interface](https://www.google.com/search?q=https://github.com/manili/VSDBabySoC/blob/main/src/module/avsddac.v)
+
   * [AVSD PLL Module](https://www.google.com/search?q=https://github.com/manili/VSDBabySoC/blob/main/src/module/avsdpll.v)
