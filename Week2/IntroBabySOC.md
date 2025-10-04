@@ -22,6 +22,9 @@ A System-on-Chip represents the zenith of semiconductor integration, embodying a
 
 By collocating all functional units, the physical distance that signals must travel is reduced by orders of magnitude. This miniaturization directly translates to higher operational frequencies (**performance**) and a significant reduction in the capacitive load that must be driven, thus lowering energy consumption (**power**). Concurrently, this integration minimizes the overall physical footprint (**area**), enabling the development of sophisticated, portable electronics.
 
+<img width="850" height="761" alt="A-Sample-System-on-Chip-SoC-architecture" src="https://github.com/user-attachments/assets/83009595-2f51-45dc-a598-b71a27a775df" />
+
+
 ### 2\. The Anatomy of a Modern SoC
 
 A contemporary SoC is a heterogeneous environment, a complex ecosystem of specialized processors and subsystems that must communicate seamlessly. It can be conceptualized as a micro-city, with each district serving a unique purpose.
@@ -57,6 +60,8 @@ It comprises three essential, yet distinct, functional blocks:
   * **Digital-to-Analog Converter (DAC):** An interface block that translates the internal digital data of the SoC into real-world analog signals. The DAC is representative of the I/O and peripheral subsystems that allow the chip to interact with its environment.
 
 By modeling and simulating the interplay between these digital, analog, and interface components, one gains a practical understanding of the system-level challenges inherent in SoC design.
+<img width="1012" height="603" alt="189318328-db0fbdfe-fd84-432b-9262-a8171f91658c" src="https://github.com/user-attachments/assets/0e0d6fe9-912b-4973-bfaa-92f563cbcb6d" />
+
 
 ### 5\. Methodology and Toolchain
 
@@ -64,4 +69,5 @@ The methodology for this exploration is centered on functional modeling and simu
 
   * **`Icarus Verilog`:** Serves as the simulation engine for compiling and executing the behavioral Verilog model of the BabySoC.
   * **`GTKWave`:** A powerful waveform viewer used for the visual inspection, analysis, and debugging of the simulation output.
+
   * **`Yosys` & `Sky130 PDK`:** While primarily used in later stages of the design flow (synthesis and physical design), understanding the target synthesis tool and technology library provides valuable context during the initial modeling phase.
