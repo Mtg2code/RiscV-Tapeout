@@ -33,6 +33,8 @@ Add the OpenSTA binary directory to your PATH for easy access:
 ```bash
 export PATH=$PATH:~/VSDBabySoC/OpenSTA/build
 ```
+ ![Alt](Week3/STA1.png)
+ ![Alt](Week3/STA2.png)
 
 ---
 
@@ -79,6 +81,7 @@ Path Type: max
 ---------------------------------------------------------
            9.43   slack (MET)
 ```
+![Alt](Week3/STA3.png)
 
 ---
 
@@ -96,6 +99,7 @@ link_design vsdbabysoc
 read_sdc src/sdc/vsdbabysoc_synthesis.sdc
 report_checks
 ```
+![Alt](Week3/STA4.png)
 
 ---
 
@@ -144,6 +148,8 @@ Path Type: max
 ---------------------------------------------------------
            1.11   slack (MET)
 ```
+
+![Alt](Week3/STA5.png)
 
 ---
 
@@ -234,6 +240,8 @@ for {set i 1} {$i <= [array size list_of_lib_files]} {incr i} {
 | ss_n40C_1v40        | Analysis Complete | Slow corner |
 | ss_n40C_1v44        | Analysis Complete | Slow corner |
 | ss_n40C_1v76        | Analysis Complete | Slow corner |
+
+![Alt](Week3/STA6.png)
 
 ### Analysis Summary
 
@@ -336,6 +344,14 @@ VSDBabySoC/
    - These don't prevent the analysis from completing successfully
 
 ---
+<img width="1116" height="553" alt="393624086-769c8079-dfea-422e-8cc7-8e6240420b1b" src="https://github.com/user-attachments/assets/3d93f59f-3509-45e8-9aa0-33013e09c1fd" />
+<img width="1109" height="572" alt="393624059-c2735063-c6c8-4a51-8f6a-2d17818fa2e5" src="https://github.com/user-attachments/assets/81ca8e09-ee48-493e-901d-eabb9c5c3cd2" />
+<img width="937" height="545" alt="393624113-fc904026-5a3c-4bca-8e41-1624474f4852" src="https://github.com/user-attachments/assets/2711b392-21e6-45b2-b871-72c72d2f0209" />
+<img width="955" height="539" alt="393624123-6daea128-878b-4286-96ab-08ea7bdd3b83" src="https://github.com/user-attachments/assets/d2c92ad6-f359-4779-888f-33fb319c83f0" />
+<img width="937" height="545" alt="393624113-fc904026-5a3c-4bca-8e41-1624474f4852" src="https://github.com/user-attachments/assets/ed779eda-aed8-46d2-b819-f63b324a0d35" />
+
+
+
 
 ## References
 
@@ -344,5 +360,6 @@ VSDBabySoC/
 - [OpenSTA Documentation](https://github.com/The-OpenROAD-Project/OpenSTA/blob/master/doc/OpenSTA.pdf)
 
 ---
+
 
 
