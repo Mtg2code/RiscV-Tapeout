@@ -28,12 +28,14 @@ Understand and perform Gate-Level Simulation (GLS) after synthesis to validate d
     read_verilog -I /home/tom/VSDBabySoC/src/include /home/tom/VSDBabySoC/src/module/rvmyth.v
     read_verilog -I /home/tom/VSDBabySoC/src/include /home/tom/VSDBabySoC/src/module/clk_gate.v
   ```
+  ![Alt](Week3/GLS1.png)
 - Load Liberty files:
   ```yosys
   read_liberty -lib /home/tom/VSDBabySoC/src/lib/avsdpll.lib
   read_liberty -lib /home/tom/VSDBabySoC/src/lib/avsddac.lib
   read_liberty -lib /home/tom/VSDBabySoC/src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
   ```
+   ![Alt](Week3/GLS2.png)
 - Synthesize and optimize:
   ```yosys
   synth -top vsdbabysoc
@@ -47,6 +49,7 @@ Understand and perform Gate-Level Simulation (GLS) after synthesis to validate d
   stat
   write_verilog -noattr /home/tom/VSDBabySoC/output/post_synth_sim/vsdbabysoc.synth.v
   ```
+   ![Alt](Week3/GLS3.png)
 
 #### 2. Run Gate-Level Simulation
 
@@ -60,11 +63,13 @@ Understand and perform Gate-Level Simulation (GLS) after synthesis to validate d
   ./post_synth_sim.out
   gtkwave post_synth_sim.vcd
   ```
+   ![Alt](Week3/GLS4.png)
 ---
 
 ## References
 
 - [GLS Example – VSD_HDP Day 6](https://github.com/Ananya-KM/VSD_HDP/blob/main/Day%206.md)
 - [BabySoC Design](https://github.com/Ananya-KM/VSD_HDP)
+
 
 ---
