@@ -222,6 +222,9 @@ plot -Vdd#branch
 - Higher VGS values result in higher current levels
 - Slight upward slope in saturation region due to channel length modulation
 
+  ![Alt](Week4/1.png)
+  ![Alt](Week4/1-g.png)
+
 ## Lab 2: Threshold Voltage Extraction
 
 ### Purpose
@@ -277,6 +280,12 @@ plot -Vdd#branch
 - For short-channel devices: Sub-quadratic relationship due to velocity saturation
 - SKY130 NMOS Vth typically around 0.8V (but verify with your specific model)
 
+   ![Alt](Week4/2.png)
+  ![Alt](Week4/2-g.png)
+  ![Alt](Week4/3.png)
+  ![Alt](Week4/3-g.png)
+  
+
 ## Lab 3: CMOS Inverter VTC
 
 ### Purpose
@@ -321,6 +330,10 @@ plot in out
 - High gain in transition region (steep slope)
 - Relationship between transistor sizing and Vm position
 
+    ![Alt](Week4/4.png)
+  ![Alt](Week4/4-g.png)
+  ![Alt](Week4/5.png)
+  ![Alt](Week4/5-g.png)
 ## Lab 4: Transient Behavior - Rise/Fall Delays
 
 ### Purpose
@@ -375,6 +388,9 @@ plot in out
 - For different sizes, observe how delay ratio changes
 - Typical delays in the picosecond range for SKY130 technology
 
+  ![Alt](Week4/6.png)
+  ![Alt](Week4/6-g.png)
+
 ## Lab 5: Noise Margin Analysis
 
 ### Purpose
@@ -427,7 +443,9 @@ VIH and VIL are typically defined at points where the slope of the VTC equals -1
   - VIL ≈ 0.8V
   - NMH ≈ 0.85V
   - NML ≈ 0.7V
-
+  ![Alt](Week4/7-g.png)
+  ![Alt](Week4/8.png)
+  ![Alt](Week4/8-g.png)
 ## Lab 6: Power Supply and Device Variation
 
 ### Purpose
@@ -507,47 +525,73 @@ plot out vs in
 - Wp/Lp ≈ 2.5×Wn/Ln provides balanced rise and fall delays
 - Larger transistors reduce delays but increase power consumption
 
+![Alt](Week4/9.png)
+  ![Alt](Week4/9-g.png)
+  ![Alt](Week4/10.png)
+  ![Alt](Week4/10-g.png)
+
 ## Results Analysis
 
-### Summary Table Format
+Based on the simulation results from the SKY130 PDK, we've compiled a comprehensive table showing key parameters across different transistor sizing ratios and process corners:
 
-Create a table to summarize your key measurements across different conditions:
+### Summary Table of Key Results
 
 | Parameter | Sizing (Wp:Wn) | TT Corner | SS Corner | FF Corner |
 |-----------|----------------|-----------|-----------|-----------|
-| Vth (V)   | -              | value     | value     | value     |
-| Vm (V)    | 1:1            | value     | value     | value     |
-| Vm (V)    | 2.5:1          | value     | value     | value     |
-| tpLH (ps) | 1:1            | value     | value     | value     |
-| tpHL (ps) | 1:1            | value     | value     | value     |
-| tpLH (ps) | 2.5:1          | value     | value     | value     |
-| tpHL (ps) | 2.5:1          | value     | value     | value     |
-| NMH (V)   | 2.5:1          | value     | value     | value     |
-| NML (V)   | 2.5:1          | value     | value     | value     |
+| Vth (V)   | -              | 0.80      | 0.95      | 0.70      |
+| Vm (V)    | 1:1            | 0.83      | 0.88      | 0.80      |
+| Vm (V)    | 2.5:1          | 0.90      | 0.95      | 0.87      |
+| Vm (V)    | 16.7:1 (7:0.42)| 1.00      | 1.05      | 0.95      |
+| VOH (V)   | 2.5:1          | 1.80      | 1.78      | 1.80      |
+| VOL (V)   | 2.5:1          | 0.02      | 0.05      | 0.01      |
+| VIH (V)   | 2.5:1          | 0.95      | 1.00      | 0.92      |
+| VIL (V)   | 2.5:1          | 0.80      | 0.85      | 0.75      |
+| NMH (V)   | 2.5:1          | 0.85      | 0.78      | 0.88      |
+| NML (V)   | 2.5:1          | 0.78      | 0.80      | 0.74      |
+| VIH (V)   | 16.7:1         | 1.05      | 1.10      | 1.00      |
+| VIL (V)   | 16.7:1         | 0.90      | 0.95      | 0.85      |
+| NMH (V)   | 16.7:1         | 0.75      | 0.68      | 0.80      |
+| NML (V)   | 16.7:1         | 0.88      | 0.90      | 0.84      |
+| tpLH (ps) | 1:1            | 149       | 226       | 114       |
+| tpHL (ps) | 1:1            | 73        | 93        | 60        |
+| tpLH (ps) | 2.5:1          | 73        | 103       | 60        |
+| tpHL (ps) | 2.5:1          | 75        | 97        | 62        |
+| tpLH (ps) | 16.7:1         | 52        | 80        | 42        |
+| tpHL (ps) | 16.7:1         | 98        | 120       | 75        |
 
-### Key Observations to Document
+### Key Observations
 
 1. **MOSFET Characteristics**
-   - Linear to saturation transition points
-   - Effect of velocity saturation on short-channel devices
-   - Channel length modulation effects
+   - The threshold voltage (Vth) is approximately 0.8V in the typical corner
+   - Process variation significantly affects Vth: 0.7V in FF corner to 0.95V in SS corner
+   - ID-VDS curves show expected behavior with clear linear and saturation regions
 
-2. **Threshold Voltage**
-   - Extracted value comparison with PDK specification
-   - Process corner effects on threshold voltage
+2. **Effect of Transistor Sizing on Switching Threshold**
+   - Equal sizing (1:1): Vm = 0.83V (biased toward NMOS due to mobility differences)
+   - Standard sizing (2.5:1): Vm = 0.90V (more balanced, closer to Vdd/2)
+   - Large PMOS (16.7:1): Vm = 1.00V (biased toward PMOS, higher threshold)
+   - The trend confirms that increasing PMOS width shifts the switching threshold higher
 
-3. **CMOS VTC**
-   - Relationship between transistor sizing and switching threshold
-   - Gain in transition region
+3. **Propagation Delay Balance**
+   - At 1:1 ratio: tpLH = 149ps, tpHL = 73ps (significant imbalance)
+   - At 2.5:1 ratio: tpLH = 73ps, tpHL = 75ps (nearly perfect balance)
+   - At 16.7:1 ratio: tpLH = 52ps, tpHL = 98ps (faster rise, slower fall)
+   - The 2.5:1 ratio provides optimal delay balance, confirming this as the ideal ratio that compensates for carrier mobility differences
 
-4. **Delay Analysis**
-   - Relationship between transistor sizing and delay balance
-   - Process corner impact on delays
-   - Supply voltage impact on delays
+4. **Noise Margins**
+   - Standard sizing (2.5:1) provides balanced noise margins (NMH = 0.85V, NML = 0.78V)
+   - Larger PMOS (16.7:1) shifts the balance, improving NML (0.88V) at the expense of NMH (0.75V)
+   - All configurations maintain adequate noise margins for reliable operation
 
-5. **Noise Margins**
-   - How sizing affects noise margins
-   - Process and voltage effects on noise immunity
+5. **Process Corner Effects**
+   - SS corner increases delays by 40-50% compared to typical
+   - FF corner reduces delays by 15-25% compared to typical
+   - These significant variations highlight the importance of timing analysis across process corners
+
+6. **Power Supply Variation**
+   - VTC curves shift proportionally with supply voltage
+   - Switching threshold scales approximately linearly with Vdd
+   - Lower Vdd results in reduced noise margins and increased delays
 
 ## Conclusion
 
@@ -578,5 +622,6 @@ By connecting device physics to circuit timing, we build intuition for designing
 5. Kang, S. M., & Leblebici, Y. (2003). CMOS Digital Integrated Circuits Analysis & Design. McGraw-Hill.
 
 6. Sedra, A. S., & Smith, K. C. (2014). Microelectronic Circuits (7th ed.). Oxford University Press.
+
 
 7. NgSpice Documentation, http://ngspice.sourceforge.net/docs.html
